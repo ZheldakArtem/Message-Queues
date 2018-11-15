@@ -9,174 +9,67 @@ using System.Threading.Tasks;
 
 namespace FileProcessingService
 {
-	public class FileService
+	public class FileService : IDisposable
 	{
-		private FileSystemWatcher _watcher;
-		private string _inDir;
-		private string _outDir;
-		private string _outWrongFileNamingDir;
-		private string _invalidFileSequenceDir;
-		private Thread _workThread;
-		private ManualResetEvent _stopWork;
-		private AutoResetEvent _newFileEvent;
-		private PdfCreatorr _pdfCreator;
-
+		private readonly FileSystemWatcher watcher;
+		private readonly string inDir;
+		private readonly string outDir;
+		private readonly string outWrongFileNamingDir;
+		private readonly string invalidFileSequenceDir;
+		private readonly Thread workThread;
+		private readonly ManualResetEvent stopWork;
+		private readonly AutoResetEvent newFileEvent;
+		private readonly PdfCreator pdfCreator;
 
 		public FileService(string inDir, string outDir, string outWrongFileNamingDir, string invalidFileSequenceDir)
 		{
-			this._inDir = inDir;
-			this._outDir = outDir;
-			this._outWrongFileNamingDir = outWrongFileNamingDir;
-			this._invalidFileSequenceDir = invalidFileSequenceDir;
+			this.inDir = inDir;
+			this.outDir = outDir;
+			this.outWrongFileNamingDir = outWrongFileNamingDir;
+			this.invalidFileSequenceDir = invalidFileSequenceDir;
 
-			if (!Directory.Exists(this._inDir))
+			if (!Directory.Exists(this.inDir))
 			{
-				Directory.CreateDirectory(this._inDir);
+				Directory.CreateDirectory(this.inDir);
 			}
 
-			if (!Directory.Exists(this._outDir))
+			if (!Directory.Exists(this.outDir))
 			{
-				Directory.CreateDirectory(this._outDir);
+				Directory.CreateDirectory(this.outDir);
 			}
 
-			if (!Directory.Exists(this._outWrongFileNamingDir))
+			if (!Directory.Exists(this.outWrongFileNamingDir))
 			{
-				Directory.CreateDirectory(this._outWrongFileNamingDir);
+				Directory.CreateDirectory(this.outWrongFileNamingDir);
 			}
 
-			if (!Directory.Exists(this._invalidFileSequenceDir))
+			if (!Directory.Exists(this.invalidFileSequenceDir))
 			{
-				Directory.CreateDirectory(this._invalidFileSequenceDir);
+				Directory.CreateDirectory(this.invalidFileSequenceDir);
 			}
 
-			_watcher = new FileSystemWatcher(this._inDir);
-			_watcher.Created += Watcher_Created;
-			_workThread = new Thread(WorkProcedure);
-			_stopWork = new ManualResetEvent(false);
-			_newFileEvent = new AutoResetEvent(false);
-			_pdfCreator = new PdfCreatorr();
+			this.watcher = new FileSystemWatcher(this.inDir);
+			this.watcher.Created += this.Watcher_Created;
+			this.workThread = new Thread(this.WorkProcedure);
+			this.stopWork = new ManualResetEvent(false);
+			this.newFileEvent = new AutoResetEvent(false);
+			this.pdfCreator = new PdfCreator();
 
-			_pdfCreator.CallbackWhenReadyToSave += SavePdfDocument;
-			_pdfCreator.CallbackWhenSecuenceHasWrongFileExtention += MoveAllFileSequenceToOtherDir;
-		}
-
-		private void MoveAllFileSequenceToOtherDir(object sender, EventArgs e)
-		{
-			foreach (var fullFilePath in _pdfCreator.GetAllImageFilePath)
-			{
-				if (TryOpen(fullFilePath, 5))
-				{
-					File.Move(fullFilePath, Path.Combine(this._invalidFileSequenceDir, Path.GetFileName(fullFilePath)));
-				}
-			}
-
-			if (TryOpen(_pdfCreator.CurrentBarcodeFilePath, 5))
-			{
-				File.Delete(_pdfCreator.CurrentBarcodeFilePath);
-			}
-			_pdfCreator.Reset();
-		}
-
-		private void SavePdfDocument(object sender, EventArgs e)
-		{
-			_pdfCreator.Save(_outDir);
-			foreach (var fullFilePath in _pdfCreator.GetAllImageFilePath)
-			{
-				if (TryOpen(fullFilePath, 5))
-				{
-					File.Delete(fullFilePath);
-				}
-			}
-
-			if (TryOpen(_pdfCreator.CurrentBarcodeFilePath, 5))
-			{
-				File.Delete(_pdfCreator.CurrentBarcodeFilePath);
-			}
-
-			_pdfCreator.Reset();
-
-		}
-
-		private void WorkProcedure(object obj)
-		{
-
-			List<string> fileNameValidList;
-			List<string> sortedFileList;
-			do
-			{
-				fileNameValidList = CatchWrongFiles(_inDir, _outWrongFileNamingDir);
-
-				sortedFileList = fileNameValidList.OrderBy(s => int.Parse(Path.GetFileNameWithoutExtension(s).Split('_')[1])).ToList();
-
-				foreach (var file in sortedFileList)
-				{
-					if (_stopWork.WaitOne(TimeSpan.Zero))
-					{
-						return;
-					}
-
-					var outFile = Path.Combine(_outDir, Path.GetFileName(file));
-
-					if (TryOpen(file, 5))
-					{
-						_pdfCreator.PushFile(file);
-					}
-				}
-
-			} while (WaitHandle.WaitAny(new WaitHandle[] { _stopWork, _newFileEvent }, 5000) != 0);
-
-		}
-
-		private List<string> CatchWrongFiles(string targetDir, string outDir)
-		{
-			Regex regex = new Regex(@".*_\d+\.");
-
-			List<string> result = new List<string>();
-
-			foreach (var file in Directory.EnumerateFiles(targetDir))
-			{
-				if (!regex.Match(Path.GetFileName(file)).Success)
-				{
-					MoveToWrongFileDirectory(outDir, file);
-				}
-				else if (Path.GetFileName(file).Split('_').Length > 2)
-				{
-					MoveToWrongFileDirectory(outDir, file);
-				}
-				else
-				{
-					result.Add(file);
-				}
-			}
-
-			return result;
-		}
-
-		private void MoveToWrongFileDirectory(string outWrongDir, string file)
-		{
-			if (TryOpen(file, 10))
-			{
-				File.Move(file, Path.Combine(outWrongDir, Path.GetFileName(file)));
-			}
-		}
-
-		private void Watcher_Created(object sender, FileSystemEventArgs e)
-		{
-			_newFileEvent.Set();
+			this.pdfCreator.CallbackWhenReadyToSave += this.SavePdfDocument;
+			this.pdfCreator.CallbackWhenSecuenceHasWrongFileExtention += this.MoveAllFileSequenceToOtherDir;
 		}
 
 		public void Start()
 		{
-			_workThread.Start();
-			_watcher.EnableRaisingEvents = true;
+			this.workThread.Start();
+			this.watcher.EnableRaisingEvents = true;
 		}
 
 		public void Stop()
 		{
-			_watcher.EnableRaisingEvents = false;
-			_stopWork.Set();
-			_workThread.Join();
-
+			this.watcher.EnableRaisingEvents = false;
+			this.stopWork.Set();
+			this.workThread.Join();
 		}
 
 		public bool TryOpen(string fileNmae, int numberOfAttempt)
@@ -198,6 +91,116 @@ namespace FileProcessingService
 			}
 
 			return false;
+		}
+
+		public void Dispose()
+		{
+			this.watcher.Dispose();
+			this.stopWork.Dispose();
+			this.newFileEvent.Dispose();
+		}
+
+		private void MoveAllFileSequenceToOtherDir(object sender, EventArgs e)
+		{
+			foreach (var fullFilePath in this.pdfCreator.GetAllImageFilePath)
+			{
+				if (this.TryOpen(fullFilePath, 5))
+				{
+					File.Move(fullFilePath, Path.Combine(this.invalidFileSequenceDir, Path.GetFileName(fullFilePath)));
+				}
+			}
+
+			if (this.TryOpen(this.pdfCreator.CurrentBarcodeFilePath, 5))
+			{
+				File.Delete(this.pdfCreator.CurrentBarcodeFilePath);
+			}
+
+			this.pdfCreator.Reset();
+		}
+
+		private void SavePdfDocument(object sender, EventArgs e)
+		{
+			this.pdfCreator.Save(this.outDir);
+			foreach (var fullFilePath in this.pdfCreator.GetAllImageFilePath)
+			{
+				if (this.TryOpen(fullFilePath, 5))
+				{
+					File.Delete(fullFilePath);
+				}
+			}
+
+			if (this.TryOpen(this.pdfCreator.CurrentBarcodeFilePath, 5))
+			{
+				File.Delete(this.pdfCreator.CurrentBarcodeFilePath);
+			}
+
+			this.pdfCreator.Reset();
+		}
+
+		private void WorkProcedure(object obj)
+		{
+			List<string> fileNameValidList;
+			List<string> sortedFileList;
+			do
+			{
+				fileNameValidList = this.CatchWrongFiles(this.inDir, this.outWrongFileNamingDir);
+
+				sortedFileList = fileNameValidList.OrderBy(s => int.Parse(Path.GetFileNameWithoutExtension(s).Split('_')[1])).ToList();
+
+				foreach (var file in sortedFileList)
+				{
+					if (this.stopWork.WaitOne(TimeSpan.Zero))
+					{
+						return;
+					}
+
+					var outFile = Path.Combine(this.outDir, Path.GetFileName(file));
+
+					if (this.TryOpen(file, 5))
+					{
+						this.pdfCreator.PushFile(file);
+					}
+				}
+
+			} while (WaitHandle.WaitAny(new WaitHandle[] { this.stopWork, this.newFileEvent }, 5000) != 0);
+		}
+
+		private List<string> CatchWrongFiles(string targetDir, string outDir)
+		{
+			Regex regex = new Regex(@".*_\d+\.");
+
+			List<string> result = new List<string>();
+
+			foreach (var file in Directory.EnumerateFiles(targetDir))
+			{
+				if (!regex.Match(Path.GetFileName(file)).Success)
+				{
+					this.MoveToWrongFileDirectory(outDir, file);
+				}
+				else if (Path.GetFileName(file).Split('_').Length > 2)
+				{
+					this.MoveToWrongFileDirectory(outDir, file);
+				}
+				else
+				{
+					result.Add(file);
+				}
+			}
+
+			return result;
+		}
+
+		private void MoveToWrongFileDirectory(string outWrongDir, string file)
+		{
+			if (this.TryOpen(file, 10))
+			{
+				File.Move(file, Path.Combine(outWrongDir, Path.GetFileName(file)));
+			}
+		}
+
+		private void Watcher_Created(object sender, FileSystemEventArgs e)
+		{
+			this.newFileEvent.Set();
 		}
 	}
 }

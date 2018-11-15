@@ -285,3 +285,20 @@
 2018/11/15 13:52:08.813 Running as a console application, creating the console host. 
 2018/11/15 13:52:08.818 Starting up as a console application 
 2018/11/15 13:52:08.847 The FileProcessingService service is now running, press Control+C to exit. 
+2018/11/15 16:16:53.869 Configuration Result:
+[Success] Name FileProcessingService
+[Success] DisplayName File Processing Service
+[Success] Description File Processing Service
+[Success] ServiceName FileProcessingService 
+2018/11/15 16:16:53.904 Topshelf v4.1.0.172, .NET Framework v4.0.30319.42000 
+2018/11/15 16:16:53.977 Running as a console application, creating the console host. 
+2018/11/15 16:16:53.977 Starting up as a console application 
+2018/11/15 16:17:15.414 Configuration Result:
+[Success] Name FileProcessingService
+[Success] DisplayName File Processing Service
+[Success] Description File Processing Service
+[Success] ServiceName FileProcessingService 
+2018/11/15 16:17:15.444 Topshelf v4.1.0.172, .NET Framework v4.0.30319.42000 
+2018/11/15 16:17:15.546 Running as a console application, creating the console host. 
+2018/11/15 16:17:15.546 Starting up as a console application 
+2018/11/15 16:17:15.566 The FileProcessingService service is now running, press Control+C to exit. 

@@ -12,20 +12,26 @@ using ZXing;
 
 namespace FileProcessingService
 {
-	class PdfCreatorr
+	public class PdfCreator
 	{
+		private Document document;
+		private PdfDocumentRenderer renderer;
+		private IList<string> filePathCollection = new List<string>();
 
-		private Document _document;
-		private PdfDocumentRenderer _renderer;
-		private IList<string> _filePathCollection = new List<string>();
-		public string CurrentBarcodeFilePath { get; private set; }
+		public PdfCreator()
+		{
+			this.document = new Document();
+			this.renderer = new PdfDocumentRenderer();
+		}
 
 		public event EventHandler CallbackWhenReadyToSave;
 
 		public event EventHandler CallbackWhenSecuenceHasWrongFileExtention;
 
+		public string CurrentBarcodeFilePath { get; set; }
+
 		/// <summary>
-		/// True if sequence has file with wrong extention
+		/// Gets true if sequence has file with wrong extention
 		/// </summary>
 		public bool HasWrongFileExtention { get; set; }
 
@@ -33,66 +39,80 @@ namespace FileProcessingService
 		{
 			get
 			{
-				return _filePathCollection;
+				return this.filePathCollection;
 			}
 		}
 
 		public bool IsPdfReady { get; set; }
 
-		public PdfCreatorr()
+		public void CreatePdfDocument(IList<string> getFileNames)
 		{
-			_document = new Document();
-			_renderer = new PdfDocumentRenderer();
+			this.document = new Document();
+
+			foreach (var chunk in this.filePathCollection)
+			{
+				var section = this.document.AddSection();
+				var image = section.AddImage(chunk);
+
+				image.Height = this.document.DefaultPageSetup.PageHeight;
+				image.Width = this.document.DefaultPageSetup.PageWidth;
+			}
 		}
 
 		public void PushFile(string fullFileName)
 		{
-			if (_filePathCollection.Any(p => p == fullFileName))
+			if (this.filePathCollection.Any(p => p == fullFileName))
 			{
 				return;
 			}
 
-			if (!HasBarcode(fullFileName))
+			if (!this.HasBarcode(fullFileName))
 			{
 				Regex rx = new Regex(@"\.(png|jpg)");
 				var extention = Path.GetExtension(fullFileName);
 
 				if (!rx.Match(extention).Success)
 				{
-					HasWrongFileExtention = true;
+					this.HasWrongFileExtention = true;
 				}
 
-				_filePathCollection.Add(fullFileName);
+				this.filePathCollection.Add(fullFileName);
 			}
 			else
 			{
-				CurrentBarcodeFilePath = fullFileName;
+				this.CurrentBarcodeFilePath = fullFileName;
 
 				if (this.HasWrongFileExtention)
 				{
 					this.CallbackWhenSecuenceHasWrongFileExtention?.Invoke(this, new EventArgs());
-
 				}
 				else
 				{
-					CreatePdfDocument(_filePathCollection);
+					this.CreatePdfDocument(this.filePathCollection);
 					this.CallbackWhenReadyToSave?.Invoke(this, new EventArgs());
 				}
 			}
 		}
 
-		public void CreatePdfDocument(IList<string> getFileNames)
+		public void Save(string dir)
 		{
-			_document = new Document();
+			var randomName = Path.GetFileNameWithoutExtension(Path.GetRandomFileName());
+			this.renderer.Document = this.document;
 
-			foreach (var chunk in _filePathCollection)
+			if (this.document.Sections.Count > 0)
 			{
-				var section = _document.AddSection();
-				var image = section.AddImage(chunk);
-
-				image.Height = _document.DefaultPageSetup.PageHeight;
-				image.Width = _document.DefaultPageSetup.PageWidth;
+				this.renderer.RenderDocument();
+				this.renderer.Save(dir + "\\" + randomName + ".pdf");
 			}
+		}
+
+		public void Reset()
+		{
+			this.filePathCollection = new List<string>();
+			this.IsPdfReady = false;
+			this.document = new Document();
+			this.renderer = new PdfDocumentRenderer();
+			this.CurrentBarcodeFilePath = string.Empty;
 		}
 
 		private bool HasBarcode(string fullFileName)
@@ -106,27 +126,6 @@ namespace FileProcessingService
 			}
 
 			return res != null ? true : false;
-		}
-
-		public void Save(string dir)
-		{
-			var randomName = Path.GetFileNameWithoutExtension(Path.GetRandomFileName());
-			_renderer.Document = _document;
-
-			if (_document.Sections.Count > 0)
-			{
-				_renderer.RenderDocument();
-				_renderer.Save(dir + "\\" + randomName + ".pdf");
-			}
-		}
-
-		public void Reset()
-		{
-			_filePathCollection = new List<string>();
-			IsPdfReady = false;
-			_document = new Document();
-			_renderer = new PdfDocumentRenderer();
-			CurrentBarcodeFilePath = string.Empty;
 		}
 	}
 }

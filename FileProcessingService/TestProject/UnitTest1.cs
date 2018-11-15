@@ -14,6 +14,9 @@ namespace TestProject
 	[TestClass]
 	public class UnitTest1
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		[TestMethod]
 		public void TestMethod1()
 		{
@@ -35,6 +38,9 @@ namespace TestProject
 			Console.WriteLine();
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		[TestMethod]
 		public void ZXingTest()
 		{
@@ -70,6 +76,9 @@ namespace TestProject
 			Assert.AreEqual(validNames.Length, counter);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		[TestMethod]
 		public void InvalidFileTemplateTest()
 		{

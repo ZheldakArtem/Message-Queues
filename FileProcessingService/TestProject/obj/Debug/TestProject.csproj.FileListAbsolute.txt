@@ -32,3 +32,6 @@ D:\WORK\Mentoring2018\4. Windows Services (Module 4)\Tasks\FileProcessingService
 D:\WORK\Mentoring2018\4. Windows Services (Module 4)\Tasks\FileProcessingService\TestProject\obj\Debug\TestProject.csproj.CopyComplete
 D:\WORK\Mentoring2018\4. Windows Services (Module 4)\Tasks\FileProcessingService\TestProject\obj\Debug\TestProject.dll
 D:\WORK\Mentoring2018\4. Windows Services (Module 4)\Tasks\FileProcessingService\TestProject\obj\Debug\TestProject.pdb
+D:\WORK\Mentoring2018\4. Windows Services (Module 4)\Tasks\FileProcessingService\TestProject\bin\Debug\TestProject.dll.CodeAnalysisLog.xml
+D:\WORK\Mentoring2018\4. Windows Services (Module 4)\Tasks\FileProcessingService\TestProject\bin\Debug\TestProject.dll.lastcodeanalysissucceeded
+D:\WORK\Mentoring2018\4. Windows Services (Module 4)\Tasks\FileProcessingService\TestProject\obj\Debug\TestProject.csprojAssemblyReference.cache
