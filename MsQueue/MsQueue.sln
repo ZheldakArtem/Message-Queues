@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MsQueueTest", "MsQueue\MsQueueTest.csproj", "{E346802D-66AC-4CD5-B874-29698963ABA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueueModule", "QueueModule\QueueModule.csproj", "{0DA096E4-9E79-4522-9BE0-34FEAB75C193}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainProcessingService", "QueueModule\MainProcessingService.csproj", "{0DA096E4-9E79-4522-9BE0-34FEAB75C193}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileProcessingService", "..\FileProcessingService\FileProcessingService\FileProcessingService.csproj", "{4B0257BA-F2BF-4FFF-9A6D-E5865B9EE35A}"
 EndProject
