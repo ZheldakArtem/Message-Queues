@@ -42,7 +42,7 @@ namespace FileProcessingService
 			this.outWrongFileNamingDir = outWrongFileNamingDir;
 			this.invalidFileSequenceDir = invalidFileSequenceDir;
 
-			this.InitializeFolder(inDir, outDir, outWrongFileNamingDir, invalidFileSequenceDir);
+			this.InitializeWorkFolder(inDir, outDir, outWrongFileNamingDir, invalidFileSequenceDir);
 
 			this.watcher = new FileSystemWatcher(this.inDir);
 			this.watcher.Created += this.Watcher_Created;
@@ -129,39 +129,7 @@ namespace FileProcessingService
 			}
 			catch (MessageSizeExceededException ex)
 			{
-				byte[] signal = new byte[1];
-
-				signal[0] = 0;
-				client.Send(new BrokeredMessage(signal));
-
-				List<byte> chunk = new List<byte>();
-
-				int count = 0;
-
-				for (int i = 0, j = 0; i < pdf.Length; i++, j++)
-				{
-					if (j < 200000)
-					{
-						count++;
-						chunk.Add(pdf[i]);
-					}
-					else
-					{
-						client.Send(new BrokeredMessage(chunk.ToArray()));
-
-						j = 0;
-						chunk = new List<byte>();
-						chunk.Add(pdf[i]);
-					}
-				}
-
-				if (chunk.Count > 0)
-				{
-					client.Send(new BrokeredMessage(chunk.ToArray()));
-				}
-
-				signal[0] = 1;
-				client.Send(new BrokeredMessage(signal));
+				this.StartToProcessChunkDoc(pdf, client);
 
 				Console.WriteLine(ex.Message); ////log
 			}
@@ -262,7 +230,7 @@ namespace FileProcessingService
 			this.newFileEvent.Set();
 		}
 
-		private void InitializeFolder(string inDir, string outDir, string outWrongFileNamingDir, string invalidFileSequenceDir)
+		private void InitializeWorkFolder(string inDir, string outDir, string outWrongFileNamingDir, string invalidFileSequenceDir)
 		{
 			if (!Directory.Exists(this.inDir))
 			{
@@ -301,12 +269,13 @@ namespace FileProcessingService
 			this.subscriber.OnMessage(msg =>
 			{
 				var data = msg.GetBody<StateModelData>();
-				// change barcode value
-				this.barcodeSeparator = data.CurrentSettings.BarcodeValue; //log change barcode value
 
-				// dispose prev timer and create new timer to start the method immediately
+				// change barcode value
+				this.barcodeSeparator = data.CurrentSettings.BarcodeValue;
+
+				// dispose prev timer and create the new timer to start the method immediately
 				this.timer.Dispose();
-				this.timer = this.CreateTimer(); // log start new timer after receiving the topic message
+				this.timer = this.CreateTimer();
 			});
 		}
 
@@ -314,9 +283,9 @@ namespace FileProcessingService
 		{
 			try
 			{
-				string QueueName = ConfigurationManager.AppSettings["centralQueue"];
+				string queueName = ConfigurationManager.AppSettings["centralQueue"];
 
-				var client = QueueClient.Create(QueueName);
+				var client = QueueClient.Create(queueName);
 				var state = new StateModelData()
 				{
 					Status = this.status,
@@ -340,7 +309,44 @@ namespace FileProcessingService
 		{
 			int timer = int.Parse(ConfigurationManager.AppSettings["timer"]);
 
-			return new Timer(TimerCallBackMethod, 0, 0, timer);
+			return new Timer(this.TimerCallBackMethod, 0, 0, timer);
+		}
+
+		private void StartToProcessChunkDoc(byte[] pdf, QueueClient client)
+		{
+			byte[] signal = new byte[1];
+
+			signal[0] = 0;
+			client.Send(new BrokeredMessage(signal));
+
+			List<byte> chunk = new List<byte>();
+
+			int count = 0;
+
+			for (int i = 0, j = 0; i < pdf.Length; i++, j++)
+			{
+				if (j < 200000)
+				{
+					count++;
+					chunk.Add(pdf[i]);
+				}
+				else
+				{
+					client.Send(new BrokeredMessage(chunk.ToArray()));
+
+					j = 0;
+					chunk = new List<byte>();
+					chunk.Add(pdf[i]);
+				}
+			}
+
+			if (chunk.Count > 0)
+			{
+				client.Send(new BrokeredMessage(chunk.ToArray()));
+			}
+
+			signal[0] = 1;
+			client.Send(new BrokeredMessage(signal));
 		}
 	}
 }

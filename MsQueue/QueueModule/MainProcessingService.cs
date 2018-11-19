@@ -16,9 +16,9 @@ namespace QueueModule
 {
 	public class MainProcessingService
 	{
+		private readonly FileSystemWatcher watcher;
 		private string outDir;
 		private string settingsDir;
-		private readonly FileSystemWatcher watcher;
 		private bool workWithChunkDoc = false;
 		private List<byte> chunksBuffer = new List<byte>();
 		private QueueClient docQueueClient;
@@ -37,7 +37,7 @@ namespace QueueModule
 				this.InitializeLogInstances();
 
 				this.watcher = new FileSystemWatcher(this.settingsDir);
-				this.watcher.Changed += ChangeSettingCallBack;
+				this.watcher.Changed += this.ChangeSettingCallBack;
 			}
 			catch (Exception ex)
 			{
@@ -52,9 +52,9 @@ namespace QueueModule
 
 			this.docQueueClient = QueueClient.Create(ConfigurationManager.AppSettings["queue"], ReceiveMode.ReceiveAndDelete);
 
-			docQueueClient.OnMessage(this.ProcessRetrievedMessage);
+			this.docQueueClient.OnMessage(this.ProcessRetrievedMessage);
 
-			centralManagementClient = QueueClient.Create(ConfigurationManager.AppSettings["centralQueue"], ReceiveMode.ReceiveAndDelete);
+			this.centralManagementClient = QueueClient.Create(ConfigurationManager.AppSettings["centralQueue"], ReceiveMode.ReceiveAndDelete);
 
 			this.centralManagementClient.OnMessage(msg =>
 			{
@@ -112,7 +112,7 @@ namespace QueueModule
 			}
 			catch (Exception ex)
 			{
-				this.errorLog.Error(ex,"ProcessRetrievedMessage method catch some error");
+				this.errorLog.Error(ex, "ProcessRetrievedMessage method catch some error");
 			}
 		}
 
