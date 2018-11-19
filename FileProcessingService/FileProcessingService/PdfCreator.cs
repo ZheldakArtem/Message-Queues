@@ -24,7 +24,7 @@ namespace FileProcessingService
 			this.renderer = new PdfDocumentRenderer();
 		}
 
-		public event EventHandler CallbackWhenReadyToSave;
+		public event EventHandler CallbackWhenReadyToSendToQueue;
 
 		public event EventHandler CallbackWhenSecuenceHasWrongFileExtention;
 
@@ -89,21 +89,29 @@ namespace FileProcessingService
 				else
 				{
 					this.CreatePdfDocument(this.filePathCollection);
-					this.CallbackWhenReadyToSave?.Invoke(this, new EventArgs());
+					this.CallbackWhenReadyToSendToQueue?.Invoke(this, new EventArgs());
 				}
 			}
 		}
 
-		public void Save(string dir)
+		public byte[] GetPdf(string dir)
 		{
 			var randomName = Path.GetFileNameWithoutExtension(Path.GetRandomFileName());
-			this.renderer.Document = this.document;
+			var pathPdf = dir + "\\" + randomName + ".pdf";
 
+			this.renderer.Document = this.document;
+			
 			if (this.document.Sections.Count > 0)
 			{
 				this.renderer.RenderDocument();
-				this.renderer.Save(dir + "\\" + randomName + ".pdf");
+				this.renderer.Save(pathPdf);
 			}
+
+			var bytes = File.ReadAllBytes(pathPdf);
+
+			File.Delete(pathPdf);
+
+			return bytes;
 		}
 
 		public void Reset()

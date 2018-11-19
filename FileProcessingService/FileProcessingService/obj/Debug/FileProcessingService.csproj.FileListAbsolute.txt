@@ -33,3 +33,43 @@ D:\WORK\Mentoring2018\4. Windows Services (Module 4)\Tasks\FileProcessingService
 D:\WORK\Mentoring2018\4. Windows Services (Module 4)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\de\PdfSharp.resources.dll
 D:\WORK\Mentoring2018\4. Windows Services (Module 4)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\de\PdfSharp.Charting.resources.dll
 D:\WORK\Mentoring2018\4. Windows Services (Module 4)\Tasks\FileProcessingService\FileProcessingService\obj\Debug\FileProcessingService.csprojAssemblyReference.cache
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\FileProcessingService.exe.config
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\FileProcessingService.exe
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\FileProcessingService.pdb
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\Microsoft.ServiceBus.dll
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\Microsoft.WindowsAzure.Configuration.dll
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\MigraDoc.DocumentObjectModel.dll
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\MigraDoc.Rendering.dll
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\MigraDoc.RtfRendering.dll
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\NLog.dll
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\PdfSharp.Charting.dll
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\PdfSharp.dll
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\Topshelf.dll
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\Topshelf.NLog.dll
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\zxing.dll
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\zxing.presentation.dll
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\Microsoft.ServiceBus.xml
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\MigraDoc.DocumentObjectModel.xml
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\MigraDoc.Rendering.xml
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\MigraDoc.RtfRendering.xml
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\NLog.xml
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\PdfSharp.xml
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\PdfSharp.Charting.xml
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\Topshelf.xml
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\Topshelf.NLog.xml
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\zxing.pdb
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\zxing.xml
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\zxing.presentation.pdb
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\zxing.presentation.xml
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\de\MigraDoc.DocumentObjectModel.resources.dll
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\de\MigraDoc.Rendering.resources.dll
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\de\MigraDoc.RtfRendering.resources.dll
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\de\PdfSharp.resources.dll
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\de\PdfSharp.Charting.resources.dll
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\obj\Debug\FileProcessingService.csprojAssemblyReference.cache
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\obj\Debug\FileProcessingService.csproj.CoreCompileInputs.cache
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\obj\Debug\FileProcessingService.csproj.CopyComplete
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\obj\Debug\FileProcessingService.exe
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\obj\Debug\FileProcessingService.pdb
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\SharedModel.dll
+D:\WORK\Mentoring2018\5. Message Queues(Module 5)\Tasks\FileProcessingService\FileProcessingService\bin\Debug\SharedModel.pdb

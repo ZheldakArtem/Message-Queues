@@ -1,10 +1,13 @@
 <stylecopresultscache>
   <version>12</version>
-  <sourcecode name="FileService.cs" parser="StyleCop.CSharp.CsParser">
+  <project key="-466183867">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="Program.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2018/11/15 16:39:19.688</styleCop>
       <settingsFile>2018/11/15 17:30:20.603</settingsFile>
-      <sourceFile>2018/11/15 17:29:57.255</sourceFile>
+      <sourceFile>2018/11/16 18:25:45.845</sourceFile>
       <parser>2018/11/15 16:39:19.688</parser>
       <StyleCop.CSharp.DocumentationRules>2018/11/15 16:39:19.688</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>0</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -23,13 +26,8 @@
     </timestamps>
     <violations>
       <violation namespace="StyleCop.CSharp.LayoutRules" rule="CurlyBracketsForMultiLineStatementsMustNotShareLine" ruleCheckId="SA1500">
-        <context>If a statement spans multiple lines, the closing curly bracket must be placed on its own line.</context>
-        <line>165</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="StyleCop.CSharp.LayoutRules" rule="ClosingCurlyBracketsMustNotBePrecededByBlankLine" ruleCheckId="SA1508">
-        <context>A closing curly bracket must not be preceded by a blank line.</context>
-        <line>165</line>
+        <context>If a statement spans multiple lines, the opening curly bracket must be placed on its own line.</context>
+        <line>36</line>
         <warning>False</warning>
       </violation>
     </violations>
@@ -57,43 +55,11 @@
     </timestamps>
     <violations />
   </sourcecode>
-  <sourcecode name="Program.cs" parser="StyleCop.CSharp.CsParser">
-    <timestamps>
-      <styleCop>2018/11/15 16:39:19.688</styleCop>
-      <settingsFile>2018/11/15 17:30:20.603</settingsFile>
-      <sourceFile>2018/11/15 17:31:23.277</sourceFile>
-      <parser>2018/11/15 16:39:19.688</parser>
-      <StyleCop.CSharp.DocumentationRules>2018/11/15 16:39:19.688</StyleCop.CSharp.DocumentationRules>
-      <StyleCop.CSharp.DocumentationRules.FilesHashCode>0</StyleCop.CSharp.DocumentationRules.FilesHashCode>
-      <StyleCop.CSharp.LayoutRules>2018/11/15 16:39:19.688</StyleCop.CSharp.LayoutRules>
-      <StyleCop.CSharp.LayoutRules.FilesHashCode>0</StyleCop.CSharp.LayoutRules.FilesHashCode>
-      <StyleCop.CSharp.MaintainabilityRules>2018/11/15 16:39:19.688</StyleCop.CSharp.MaintainabilityRules>
-      <StyleCop.CSharp.MaintainabilityRules.FilesHashCode>0</StyleCop.CSharp.MaintainabilityRules.FilesHashCode>
-      <StyleCop.CSharp.NamingRules>2018/11/15 16:39:19.688</StyleCop.CSharp.NamingRules>
-      <StyleCop.CSharp.NamingRules.FilesHashCode>0</StyleCop.CSharp.NamingRules.FilesHashCode>
-      <StyleCop.CSharp.OrderingRules>2018/11/15 16:39:19.688</StyleCop.CSharp.OrderingRules>
-      <StyleCop.CSharp.OrderingRules.FilesHashCode>0</StyleCop.CSharp.OrderingRules.FilesHashCode>
-      <StyleCop.CSharp.ReadabilityRules>2018/11/15 16:39:19.688</StyleCop.CSharp.ReadabilityRules>
-      <StyleCop.CSharp.ReadabilityRules.FilesHashCode>0</StyleCop.CSharp.ReadabilityRules.FilesHashCode>
-      <StyleCop.CSharp.SpacingRules>2018/11/15 16:39:19.688</StyleCop.CSharp.SpacingRules>
-      <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
-    </timestamps>
-    <violations>
-      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CurlyBracketsForMultiLineStatementsMustNotShareLine" ruleCheckId="SA1500">
-        <context>If a statement spans multiple lines, the opening curly bracket must be placed on its own line.</context>
-        <line>36</line>
-        <warning>False</warning>
-      </violation>
-    </violations>
-  </sourcecode>
-  <project key="-466183867">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="PdfCreator.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2018/11/15 16:39:19.688</styleCop>
       <settingsFile>2018/11/15 17:30:20.603</settingsFile>
-      <sourceFile>2018/11/15 17:33:29.378</sourceFile>
+      <sourceFile>2018/11/18 15:36:03.785</sourceFile>
       <parser>2018/11/15 16:39:19.688</parser>
       <StyleCop.CSharp.DocumentationRules>2018/11/15 16:39:19.688</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>0</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -114,6 +80,53 @@
       <violation namespace="StyleCop.CSharp.DocumentationRules" rule="PropertySummaryDocumentationMustMatchAccessors" ruleCheckId="SA1623">
         <context>The property's documentation summary text must begin with: Gets or sets a value indicating whether</context>
         <line>36</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <project key="-93326615">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="FileService.cs" parser="StyleCop.CSharp.CsParser">
+    <timestamps>
+      <styleCop>2018/11/15 16:39:19.688</styleCop>
+      <settingsFile>2018/11/15 17:30:20.603</settingsFile>
+      <sourceFile>2018/11/18 15:37:34.451</sourceFile>
+      <parser>2018/11/15 16:39:19.688</parser>
+      <StyleCop.CSharp.DocumentationRules>2018/11/15 16:39:19.688</StyleCop.CSharp.DocumentationRules>
+      <StyleCop.CSharp.DocumentationRules.FilesHashCode>0</StyleCop.CSharp.DocumentationRules.FilesHashCode>
+      <StyleCop.CSharp.LayoutRules>2018/11/15 16:39:19.688</StyleCop.CSharp.LayoutRules>
+      <StyleCop.CSharp.LayoutRules.FilesHashCode>0</StyleCop.CSharp.LayoutRules.FilesHashCode>
+      <StyleCop.CSharp.MaintainabilityRules>2018/11/15 16:39:19.688</StyleCop.CSharp.MaintainabilityRules>
+      <StyleCop.CSharp.MaintainabilityRules.FilesHashCode>0</StyleCop.CSharp.MaintainabilityRules.FilesHashCode>
+      <StyleCop.CSharp.NamingRules>2018/11/15 16:39:19.688</StyleCop.CSharp.NamingRules>
+      <StyleCop.CSharp.NamingRules.FilesHashCode>0</StyleCop.CSharp.NamingRules.FilesHashCode>
+      <StyleCop.CSharp.OrderingRules>2018/11/15 16:39:19.688</StyleCop.CSharp.OrderingRules>
+      <StyleCop.CSharp.OrderingRules.FilesHashCode>0</StyleCop.CSharp.OrderingRules.FilesHashCode>
+      <StyleCop.CSharp.ReadabilityRules>2018/11/15 16:39:19.688</StyleCop.CSharp.ReadabilityRules>
+      <StyleCop.CSharp.ReadabilityRules.FilesHashCode>0</StyleCop.CSharp.ReadabilityRules.FilesHashCode>
+      <StyleCop.CSharp.SpacingRules>2018/11/15 16:39:19.688</StyleCop.CSharp.SpacingRules>
+      <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
+    </timestamps>
+    <violations>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="ClosingCurlyBracketsMustNotBePrecededByBlankLine" ruleCheckId="SA1508">
+        <context>A closing curly bracket must not be preceded by a blank line.</context>
+        <line>120</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.LayoutRules" rule="CurlyBracketsForMultiLineStatementsMustNotShareLine" ruleCheckId="SA1500">
+        <context>If a statement spans multiple lines, the closing curly bracket must be placed on its own line.</context>
+        <line>210</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="ParametersMustBeOnSameLineOrSeparateLines" ruleCheckId="SA1117">
+        <context>All method parameters must be placed on the same line, or each parameter must be placed on a separate line.</context>
+        <line>218</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="ParameterMustFollowComma" ruleCheckId="SA1115">
+        <context>The parameter must begin on the line after the previous parameter.</context>
+        <line>235</line>
         <warning>False</warning>
       </violation>
     </violations>
