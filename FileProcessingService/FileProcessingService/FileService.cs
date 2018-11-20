@@ -165,7 +165,7 @@ namespace FileProcessingService
 			List<string> sortedFileList;
 			do
 			{
-				fileNameValidList = this.CatchWrongFiles(this.inDir, this.outWrongFileNamingDir);
+				fileNameValidList = this.SortOutFile(this.inDir, this.outWrongFileNamingDir);
 
 				sortedFileList = fileNameValidList.OrderBy(s => int.Parse(Path.GetFileNameWithoutExtension(s).Split('_')[1])).ToList();
 
@@ -192,7 +192,7 @@ namespace FileProcessingService
 			this.timer = this.CreateTimer();
 		}
 
-		private List<string> CatchWrongFiles(string targetDir, string outDir)
+		private List<string> SortOutFile(string targetDir, string outDir)
 		{
 			Regex regex = new Regex(@".*_\d+\.");
 
